@@ -1,183 +1,100 @@
-Você é um engenheiro sênior de redes e jogos multiplayer, especialista em Unity 6, C#, arquitetura cliente/servidor, jogos survival estilo Rust e LiteNetLib (versão mais recente – 23/12/2025).
-Seu objetivo é CRIAR UM SISTEMA COMPLETO, funcional e sem erros, composto por:
-🖥️ Servidor dedicado C# (.NET Console App)
-🎮 Cliente Unity 6
-🔌 Comunicação via LiteNetLib
-🧠 Arquitetura 100% autoritativa no servidor
-💾 Sistema de save/load persistente
-🚀 Baixo lag, sincronização suave, sem desync
-🧩 VISÃO GERAL DO SISTEMA
-Arquitetura
-Servidor roda fora da Unity
-Cliente Unity apenas:
-Envia input
-Renderiza
-Servidor:
-Simula mundo
-Valida ações
-Sincroniza estado
-Salva dados
-🖥️ PARTE 1 – SERVIDOR DEDICADO (C#)
-🔹 Tecnologia
-.NET 9 ou superior
-LiteNetLib (última versão estável)
-Console Application
-Tickrate fixo (ex: 30 ou 60)
-📂 ESTRUTURA DE PASTAS (SERVIDOR)
-Crie exatamente essa estrutura:
-Copiar código
+CONTEXTO GERAL Você é um engenheiro sênior de jogos multiplayer, especialista em: Unity (Windows 11) FPS multiplayer Survival games (estilo Rust) Arquitetura Server Authoritative Networking em tempo real Performance, anti-lag e segurança multiplayer Quero criar um jogo estilo Rust, totalmente multiplayer, FPS, mundo aberto, com servidor dedicado autoritativo, usando Unity no Windows 11. O projeto deve ser profissional, escalável, organizado, sem lag, seguindo boas práticas de arquitetura de software, separação de responsabilidades, performance, segurança multiplayer e testes constantes por etapas. o servidor dedicado vai ser um c# e o clinte unity 6 vai se conctar ao servidor. quero que voce me mande todos os arquivos do servidor que vai ser sepradado e o clinte para conctar, no clinte vamos ter uma cena aonde colocamos o ip e apertamos no botao play e assim carrega a cena da gamaplay aonde o player vai ser spanwado no mundo e vai poder andar olhar ao redor com a camera igual ao rust, depois voce vai explicar como funciona e o que precisar ser feito para tudo funcionar
 
-RustLike.Server/
-│
-├── Program.cs
-├── ServerConfig.cs
-│
-├── Core/
-│   ├── ServerBootstrap.cs
-│   ├── GameLoop.cs
-│   ├── TickSystem.cs
-│
-├── Network/
-│   ├── NetworkServer.cs
-│   ├── NetworkPeer.cs
-│   ├── PacketHandler.cs
-│   ├── PacketSerializer.cs
-│
-├── Packets/
-│   ├── IPacket.cs
-│   ├── PacketType.cs
-│   ├── HandshakePacket.cs
-│   ├── PlayerInputPacket.cs
-│   ├── PlayerStatePacket.cs
-│   ├── WorldStatePacket.cs
-│
-├── World/
-│   ├── WorldManager.cs
-│   ├── PlayerEntity.cs
-│   ├── PlayerManager.cs
-│
-├── Persistence/
-│   ├── SaveSystem.cs
-│   ├── PlayerSaveData.cs
-│
-└── Utils/
-    ├── TimeUtils.cs
-    ├── Logger.cs
-🔹 REGRAS OBRIGATÓRIAS DO SERVIDOR
-Servidor é a autoridade absoluta
-Cliente nunca altera estado diretamente
-Todo input passa por validação
-Sistema de tick fixo
-Serialização manual (sem reflection)
-Nunca usar UnityEngine no servidor
-Nenhuma dependência visual
-Logs claros e detalhados
-🔹 FUNCIONALIDADES DO SERVIDOR
-Implemente:
-Sistema de conexão/desconexão
-Handshake inicial
-Spawn de player
-Processamento de input
-Atualização de posição
-Broadcast de estado
-Save automático por intervalo
-Load ao conectar
-Anti-spam de pacotes
-Controle de latency (RTT)
-🎮 PARTE 2 – CLIENTE UNITY 6
-🔹 Versão
-Unity 6
-Projeto 3D Core
-Input System novo
-📂 ESTRUTURA DE PASTAS (UNITY)
-Copiar código
+Analisando seu projeto, vejo que você tem uma base sólida de um jogo multiplayer estilo Rust. Aqui estão minhas sugestões para torná-lo mais profissional e completo: 🎯 SISTEMAS ESSENCIAIS FALTANDO
 
-Assets/
-│
-├── Scripts/
-│   ├── Network/
-│   │   ├── ClientNetworkManager.cs
-│   │   ├── ClientPacketHandler.cs
-│   │
-│   ├── Player/
-│   │   ├── PlayerController.cs
-│   │   ├── PlayerView.cs
-│   │
-│   ├── UI/
-│   │   ├── ConnectUI.cs
-│   │
-│   └── World/
-│       ├── WorldStateApplier.cs
-│
-├── Scenes/
-│   ├── ConnectScene.unity
-│   ├── GameplayScene.unity
-🎬 CENA 1 – CONNECT SCENE
-UI obrigatória:
-InputField (IP)
-InputField (Porta)
-Botão Play
-Fluxo:
-Usuário digita IP
-Clica Play
-Cliente conecta ao servidor
-Handshake bem-sucedido
-Carrega GameplayScene
-🎮 CENA 2 – GAMEPLAY SCENE
-Deve conter:
-Player local
-Players remotos
-Câmera
-Loop de envio de input
-Aplicação do estado recebido
-🔁 SINCRONIZAÇÃO DE REDE
-Cliente → Servidor
-Input (WASD, mouse)
-Frequência limitada
-Timestamp
-Servidor → Cliente
-Estado do player
-Interpolação
-Snapshot system
-💾 SISTEMA DE SAVE / LOAD
-Servidor deve salvar:
-Posição do player
-Último login
-ID do jogador
-Formato:
-JSON ou binário
-Um arquivo por jogador
-⚠️ REGRAS IMPORTANTES
-Resolver conflitos de namespace (ex: DisconnectReason)
-Nunca duplicar enums
-Usar namespaces claros
-Código limpo e comentado
-Sem warnings CS8618 / CS0104
-Código compilável sem ajustes manuais
-📌 RESULTADO FINAL ESPERADO
-Ao final, você deve entregar:
-Todos os arquivos do servidor
-Todos os scripts do cliente Unity
-Explicação de como rodar:
-Servidor
-Cliente
-Explicação do fluxo de rede
-Nenhum erro de build
-Sincronização suave
-Sistema pronto para evoluir para:
-Combate
-Inventário
-Construção
-Mundo persistente
-🎯 OBJETIVO FINAL
-Criar a base perfeita de um jogo estilo Rust, com:
-Servidor dedicado real
-Código limpo
-Arquitetura profissional
-Pronto para escalar
-🚨 IMPORTANTE
-Não pule arquivos.
-Não simplifique.
-Não omita código crítico.
-Não use pseudocódigo.
-Tudo deve estar completo, funcional e organizado.
+Sistema de Construção (Building) O Rust é famoso por seu sistema de construção. Você precisa:
+Fundações, paredes, portas, escadas Sistema de "building plan" (visualização antes de construir) Verificação de colisão e snap points Demolição de estruturas Propriedade de construções (TC - Tool Cupboard) Durabilidade e decay das estruturas
+
+Sistema de Crafting
+Receitas de itens Sistema de workbench (níveis 1, 2, 3) Tempo de crafting Fila de crafting Materiais necessários
+
+Sistema de Recursos e Gathering
+Árvores, pedras, minérios para coletar Ferramentas (machado, picareta) com durabilidade Animação de coleta Spawn dinâmico de recursos no mapa Diferentes tipos de recursos (madeira, pedra, metal, enxofre)
+
+Sistema de Combate Completo
+Armas (arco, espingarda, rifle, pistola) Sistema de munição Hitbox precisas (headshot, body shot) Ragdoll ao morrer Sistema de bleeding/sangramento Armaduras e proteção
+
+Sistema de Loot e World Items
+Caixas de loot espalhadas pelo mapa Items dropados no chão (com física) Sistema de pickup Despawn automático de itens após tempo Barris e caixas quebráveis
+
+🔧 MELHORIAS DE SERVIDOR 6. Persistência de Dados Você precisa salvar:
+
+Posições e inventários dos jogadores Construções no mundo Loot boxes e items no chão Sistema de "wipe" (reset periódico do servidor)
+
+Sugestões de implementação:
+
+SQLite para dados de jogadores Arquivos JSON para construções Sistema de auto-save a cada X minutos Backup automático
+
+Anti-Cheat e Validações Server-Side
+Validar velocidade de movimento (detectar speedhack) Validar distância de interação Validar crafting (tem recursos?) Validar construção (pode construir ali?) Rate limiting de ações Log de ações suspeitas
+
+Sistema de Administração
+Comandos de admin (kick, ban, tp, godmode) Sistema de permissões Console do servidor mais robusto Logs detalhados com timestamp Sistema de backup manual
+
+Otimização de Rede
+Área de interesse (só envia updates de jogadores próximos) Compressão de pacotes grandes Delta compression (só envia o que mudou) Priorização de pacotes (críticos vs não-críticos) Pooling de pacotes para evitar GC
+
+Sistemas de Spawn Inteligente
+Spawn zones configuráveis Spawn longe de outros jogadores/construções Spawn em "safe zones" temporárias Respawn de recursos no mapa
+
+🎨 MELHORIAS DE CLIENTE 11. UI/UX Mais Completo
+
+Minimapa com orientação Bússola na parte superior Indicador de jogadores próximos Sistema de notificações (toast messages) Menu de pausa completo Menu de opções (gráficos, audio, controles) Crosshair dinâmico Indicador de hit (quando acerta/é acertado)
+
+Sistema de Audio
+Sons de passos (variando por superfície) Sons ambientes Sons de combate Sons de construção Sons de coleta de recursos Sistema de áudio 3D (spatial audio) Música de fundo suave
+
+Efeitos Visuais
+Partículas de impacto (balas, ferramentas) Partículas de coleta de recursos Sangue ao tomar dano Efeito de tela ao morrer Weather system (chuva, neve) Ciclo dia/noite Post-processing (bloom, color grading)
+
+Sistema de Animações
+Animações de idle, walk, run Animações de uso de ferramentas Animações de combate Animações de death IK (Inverse Kinematics) para mãos/pés Animações de terceira pessoa para outros jogadores
+
+🌍 SISTEMAS DE MUNDO 15. Geração e Gestão de Mapa
+
+Terreno procedural ou handcrafted Biomas diferentes Pontos de interesse (monumentos, radiação) Sistema de grid para construções Zonas de PvP/PvE Sistema de território
+
+NPCs e PvE
+Animais (ursos, lobos, javalis, veados) NPCs hostis Scientists (cientistas que atacam) Sistema de AI básico Loot ao matar NPCs
+
+Sistema de Clãs/Grupos
+Criar/entrar em clãs Sistema de aliados (não causa dano) Chat de clã Território compartilhado
+
+📊 SISTEMAS DE PROGRESSÃO 18. Sistema de XP e Níveis
+
+XP por coletar, craftar, matar Níveis que desbloqueiam receitas Blueprint system (aprender receitas)
+
+Sistema de Economia
+Moeda do jogo (scrap) NPC vendors Vending machines (máquinas de venda) Sistema de comércio entre jogadores
+
+🔐 SEGURANÇA E PERFORMANCE 20. Segurança
+
+Criptografia de pacotes sensíveis Validação de todos os inputs Rate limiting por IP Sistema de blacklist Proteção contra DDoS básica
+
+Performance
+Object pooling para projéteis/efeitos LOD (Level of Detail) para modelos Occlusion culling Batching de meshes Otimização de colisões Despawn de entidades distantes
+
+Monitoramento
+Dashboard de status do servidor Métricas de performance (TPS, RAM, CPU) Gráficos de jogadores online Logs centralizados Alertas automáticos
+
+🎯 PRIORIZAÇÃO SUGERIDA FASE 1 - CORE GAMEPLAY (1-2 meses)
+
+Sistema de recursos e coleta Sistema de crafting básico Sistema de construção básico Persistência de dados
+
+FASE 2 - COMBATE (1 mês) 5. Sistema de armas 6. Sistema de dano melhorado 7. Animações de combate FASE 3 - MUNDO (1 mês) 8. Geração de mapa 9. NPCs básicos 10. Sistema de loot FASE 4 - POLISH (contínuo) 11. UI/UX melhorada 12. Efeitos visuais e sonoros 13. Otimizações 14. Anti-cheat 💡 DICAS PROFISSIONAIS Arquitetura
+
+Use um ECS (Entity Component System) para gerenciar entidades do mundo Implemente Command Pattern para ações do jogador (facilita replay/undo) Use State Machines para AI e estados do jogador Separe lógica em módulos independentes (BuildingSystem, CombatSystem, etc)
+
+Networking
+
+Implemente client-side prediction para movimento Use snapshot interpolation para outros jogadores Considere lag compensation para hits Implemente connection quality indicator
+
+Testes
+
+Crie bots de teste para simular múltiplos jogadores Implemente stress tests automáticos Use profiling constante (Unity Profiler) Teste com simulação de lag (já tem no seu NetworkConfig!)
+
+Documentação
+
+Documente protocolos de rede Crie wiki com sistemas do jogo Mantenha changelog atualizado Documente configurações do servidor
+
+Seu projeto já tem uma base excelente com LiteNetLib, sistema de stats, inventário e movimento bem implementados. Com esses sistemas adicionais, você terá um jogo muito mais próximo do Rust original!
